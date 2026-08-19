@@ -1,44 +1,52 @@
 import { describe, it, expect } from "vitest";
 import { mount } from "@vue/test-utils";
 import { ref } from "vue";
+import { vi } from "vitest";
 import DemoCounter from "../DemoCounter.vue";
 
-function mountWithState(count = 0) {
-  const state = ref({ count });
-  const dispatched = [];
-  const dispatch = (action) => dispatched.push(action);
+const counter = {
+  count: ref(0),
+  increment: vi.fn(),
+  decrement: vi.fn(),
+  reset: vi.fn(),
+};
+
+vi.mock("@/composables/useCounter", () => ({
+  useCounter: () => counter,
+}));
+
+function mountWithCount(count = 0) {
+  counter.count.value = count;
+  counter.increment.mockClear();
+  counter.decrement.mockClear();
+  counter.reset.mockClear();
+
   return {
-    wrapper: mount(DemoCounter, {
-      global: {
-        provide: { state, dispatch },
-      },
-    }),
-    state,
-    dispatched,
+    wrapper: mount(DemoCounter),
   };
 }
 
 describe("DemoCounter", () => {
   it("renders the current count", () => {
-    const { wrapper } = mountWithState(5);
+    const { wrapper } = mountWithCount(5);
     expect(wrapper.text()).toContain("5");
   });
 
-  it("dispatches INCREMENT when + is clicked", async () => {
-    const { wrapper, dispatched } = mountWithState();
+  it("increments when + is clicked", async () => {
+    const { wrapper } = mountWithCount();
     await wrapper.find("button.btn-primary").trigger("click");
-    expect(dispatched).toContainEqual({ type: "INCREMENT" });
+    expect(counter.increment).toHaveBeenCalledOnce();
   });
 
-  it("dispatches DECREMENT when − is clicked", async () => {
-    const { wrapper, dispatched } = mountWithState();
+  it("decrements when − is clicked", async () => {
+    const { wrapper } = mountWithCount();
     await wrapper.find("button.btn-outline-secondary").trigger("click");
-    expect(dispatched).toContainEqual({ type: "DECREMENT" });
+    expect(counter.decrement).toHaveBeenCalledOnce();
   });
 
-  it("dispatches RESET when Reset is clicked", async () => {
-    const { wrapper, dispatched } = mountWithState(3);
+  it("resets when Reset is clicked", async () => {
+    const { wrapper } = mountWithCount(3);
     await wrapper.find("button.btn-outline-danger").trigger("click");
-    expect(dispatched).toContainEqual({ type: "RESET" });
+    expect(counter.reset).toHaveBeenCalledOnce();
   });
 });

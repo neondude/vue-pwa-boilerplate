@@ -14,11 +14,7 @@ import DemoCounter from "@/components/DemoCounter.vue";
         <div class="card-body">
           <h6 class="card-title">Patterns in this template</h6>
           <ul class="mb-0 ps-3">
-            <li>
-              <strong>Reducer + provide/inject</strong> — global state lives in <code>App.vue</code>; components consume it via <code>inject('state')</code> and
-              <code>inject('dispatch')</code>
-            </li>
-            <li><strong>localStorage persistence</strong> — state is automatically saved and restored across page reloads</li>
+            <li><strong>Dexie + IndexedDB persistence</strong> — reactive counter state survives page reloads and browser restarts</li>
             <li><strong>Lazy-loaded routes</strong> — <code>AboutView</code> is loaded on demand via dynamic <code>import()</code></li>
             <li><strong>Bootstrap 5 via Sass</strong> — full Bootstrap imported through <code>src/scss/styles.scss</code> using the <code>~bootstrap</code> alias</li>
           </ul>
