@@ -40,13 +40,13 @@ describe("DemoCounter", () => {
 
   it("decrements when − is clicked", async () => {
     const { wrapper } = mountWithCount();
-    await wrapper.find("button.btn-outline-secondary").trigger("click");
+    await wrapper.find("button.btn-neutral").trigger("click");
     expect(counter.decrement).toHaveBeenCalledOnce();
   });
 
   it("resets when Reset is clicked", async () => {
     const { wrapper } = mountWithCount(3);
-    await wrapper.find("button.btn-outline-danger").trigger("click");
+    await wrapper.find("button.btn-error").trigger("click");
     expect(counter.reset).toHaveBeenCalledOnce();
   });
 });

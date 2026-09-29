@@ -1,16 +1,16 @@
 <template>
-  <nav class="navbar navbar-expand-md bg-body-tertiary border-bottom">
-    <div class="container-md">
-      <RouterLink class="navbar-brand fw-semibold" to="/">Vue Boilerplate</RouterLink>
-      <div class="navbar-nav flex-row gap-1">
-        <RouterLink class="btn px-3" to="/">Home</RouterLink>
-        <RouterLink class="btn px-3" to="/about">About</RouterLink>
+  <nav class="border-base-300 bg-base-200 border-b">
+    <div class="navbar mx-auto max-w-5xl px-4">
+      <div class="flex-1">
+        <RouterLink class="text-lg font-semibold" to="/">Vue Boilerplate</RouterLink>
+      </div>
+      <div class="flex gap-1">
+        <RouterLink class="nav-link btn btn-ghost" to="/">Home</RouterLink>
+        <RouterLink class="nav-link btn btn-ghost" to="/about">About</RouterLink>
       </div>
     </div>
   </nav>
-  <div class="container-md py-4">
+  <main class="mx-auto max-w-5xl px-4 py-8">
     <RouterView />
-  </div>
+  </main>
 </template>
-
-<style scoped></style>

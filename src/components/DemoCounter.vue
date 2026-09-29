@@ -5,16 +5,16 @@ const { count, increment, decrement, reset } = useCounter();
 </script>
 
 <template>
-  <div class="card">
-    <div class="card-body text-center">
-      <h5 class="card-title mb-3">Counter Demo</h5>
-      <p class="display-4 mb-4">{{ count }}</p>
-      <div class="d-flex justify-content-center gap-2">
-        <button class="btn btn-outline-secondary" @click="decrement">−</button>
+  <div class="card bg-base-100 border-base-300 border shadow-sm">
+    <div class="card-body items-center text-center">
+      <h2 class="card-title">Counter Demo</h2>
+      <p class="my-3 text-5xl font-semibold">{{ count }}</p>
+      <div class="flex justify-center gap-2">
+        <button class="btn btn-outline btn-neutral" @click="decrement">−</button>
         <button class="btn btn-primary" @click="increment">+</button>
-        <button class="btn btn-outline-danger" @click="reset">Reset</button>
+        <button class="btn btn-outline btn-error" @click="reset">Reset</button>
       </div>
-      <p class="text-muted mt-3 small">Count is persisted to IndexedDB with Dexie.</p>
+      <p class="text-base-content/60 mt-3 text-sm">Count is persisted to IndexedDB with Dexie.</p>
     </div>
   </div>
 </template>
